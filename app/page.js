@@ -192,8 +192,8 @@ const [comments, setComments] = useState([]);
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("Beaches");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 
 const places = {
@@ -299,228 +299,76 @@ const [booking, setBooking] = useState({
     <div className="bg-black text-white min-h-screen font-sans overflow-x-hidden">
 
       {/* NAVBAR */}
-      {/* NAVBAR */}
-<header
-  className={`fixed top-0 left-0 w-full z-[99999] transition-all duration-300
-  ${scrolled ? "bg-black/95 py-2 shadow-lg" : "bg-black/40 py-2"}
-  backdrop-blur-md border-b border-yellow-500/20`}
->
+      <header
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
+        ${scrolled ? "bg-black/90 py-2 shadow-lg" : "bg-white/5 py-4"}
+        backdrop-blur-md border-b border-yellow-500/20`}
+      >
+        <div className="flex justify-between items-center px-4 md:px-6">
 
-  <div
-  style={{
-    position: "fixed",
-    top: "100px",
-    right: "20px",
-    zIndex: 999999,
-    background: "red",
-    color: "white",
-    padding: "20px",
-    fontSize: "30px",
-    fontWeight: "bold",
-  }}
->
-  TEST ☰
-</div>
+          {/* LOGO */}
+          <div className="flex items-center gap-2 min-w-0">
+            <img
+              src="RNG Tours Sri Lanka.png"
+              alt="RNG Tours"
+              className={`transition-all duration-300 ${scrolled ? "h-10 md:h-14" : "h-16 md:h-24"} w-auto flex-shrink-0`}
+            />
+            <h1 className="text-yellow-400 font-bold text-base md:text-lg drop-shadow-[0_0_10px_gold] truncate">
+              RNG TOURS
+            </h1>
+          </div>
 
-  <div className="w-full px-3 sm:px-4 md:px-6">
-    <div className="flex items-center w-full min-h-[64px]">
+          <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
+            <LanguageSelector />
 
-      {/* LOGO + NAME */}
-      <div className="flex items-center gap-1 sm:gap-2 flex-shrink min-w-0">
+            {/* DESKTOP MENU */}
+            <nav className="hidden md:flex space-x-2">
+              <a href="#home"
+              className="px-4 py-2 rounded-full text-gray-300 hover:text-black hover:bg-yellow-400 transition-all duration-300 hover:shadow-[0_0_15px_gold]"
+              >Home</a>
 
-        <img
-          src="/RNG Tours Sri Lanka.png"
-          alt="RNG Tours"
-          className={`object-contain flex-shrink-0 transition-all duration-300 ${
-            scrolled
-              ? "h-11 w-auto sm:h-12 md:h-14"
-              : "h-14 w-auto sm:h-16 md:h-24"
-          }`}
-        />
+              <a href="#services"
+              className="px-4 py-2 rounded-full text-gray-300 hover:text-black hover:bg-yellow-400 transition-all duration-300 hover:shadow-[0_0_15px_gold]"
+              >Services</a>
 
-        <h1
-          className="text-yellow-400 font-bold
-          text-[12px] sm:text-sm md:text-lg
-          whitespace-nowrap
-          drop-shadow-[0_0_10px_gold]"
-        >
-          RNG TOURS
-        </h1>
+              <a href="#destinations"
+              className="px-4 py-2 rounded-full text-gray-300 hover:text-black hover:bg-yellow-400 transition-all duration-300 hover:shadow-[0_0_15px_gold]"
+              >Destinations</a>
 
-      </div>
+              <a href="#about"
+              className="px-4 py-2 rounded-full text-gray-300 hover:text-black hover:bg-yellow-400 transition-all duration-300 hover:shadow-[0_0_15px_gold]"
+              >About</a>
 
-      {/* DESKTOP NAVIGATION */}
-      <nav className="hidden md:flex items-center ml-auto mr-4">
-        <a
-          href="#home"
-          className="px-3 lg:px-4 py-2 text-white hover:text-yellow-400 transition"
-        >
-          Home
-        </a>
+              <a href="#contact"
+              className="px-4 py-2 rounded-full bg-yellow-500 text-black font-semibold hover:bg-yellow-400 transition-all duration-300 shadow-md hover:shadow-[0_0_20px_gold]"
+              >Contact</a>
+            </nav>
 
-        <a
-          href="#services"
-          className="px-3 lg:px-4 py-2 text-white hover:text-yellow-400 transition"
-        >
-          Services
-        </a>
+            {/* MOBILE HAMBURGER BUTTON */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="md:hidden text-yellow-400 text-2xl w-10 h-10 flex items-center justify-center flex-shrink-0"
+              aria-label="Toggle menu"
+              aria-expanded={menuOpen}
+            >
+              {menuOpen ? "✕" : "☰"}
+            </button>
+          </div>
+        </div>
 
-        <a
-          href="#destinations"
-          className="px-3 lg:px-4 py-2 text-white hover:text-yellow-400 transition"
-        >
-          Destinations
-        </a>
+        {/* MOBILE DROPDOWN MENU */}
+        {menuOpen && (
+          <nav className="md:hidden flex flex-col bg-black/95 backdrop-blur-md border-t border-yellow-500/20 px-6 py-4 space-y-1">
+            <a href="#home" onClick={() => setMenuOpen(false)} className="py-3 text-gray-300 hover:text-yellow-400 border-b border-white/10">Home</a>
+            <a href="#services" onClick={() => setMenuOpen(false)} className="py-3 text-gray-300 hover:text-yellow-400 border-b border-white/10">Services</a>
+            <a href="#destinations" onClick={() => setMenuOpen(false)} className="py-3 text-gray-300 hover:text-yellow-400 border-b border-white/10">Destinations</a>
+            <a href="#about" onClick={() => setMenuOpen(false)} className="py-3 text-gray-300 hover:text-yellow-400 border-b border-white/10">About</a>
+            <a href="#contact" onClick={() => setMenuOpen(false)} className="mt-2 py-3 text-center bg-yellow-500 text-black font-semibold rounded-full">Contact</a>
+          </nav>
+        )}
+      </header>
 
-        <a
-          href="#about"
-          className="px-3 lg:px-4 py-2 text-white hover:text-yellow-400 transition"
-        >
-          About
-        </a>
-
-        <a
-          href="#contact"
-          className="px-3 lg:px-4 py-2 text-white hover:text-yellow-400 transition"
-        >
-          Contact
-        </a>
-      </nav>
-
-      {/* RIGHT SIDE */}
-      <div className="ml-auto md:ml-0 flex items-center flex-shrink-0">
-
-        {/* LANGUAGE SELECTOR */}
-<div className="hidden md:block flex-shrink-0">
-  <LanguageSelector />
-</div>
-
-        {/* MOBILE HAMBURGER */}
-        <button
-  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-  type="button"
-  className="md:hidden ml-auto w-12 h-12 flex items-center justify-center rounded-lg border-2 border-yellow-400 bg-red-600"
-  style={{
-    position: "relative",
-    zIndex: 999999,
-    flexShrink: 0,
-    minWidth: "48px",
-    minHeight: "48px",
-  }}
->
-  <span className="text-white text-3xl font-bold">☰</span>
-</button>
-
-      </div>
-
-    </div>
-  </div>
-
-  {/* MOBILE MENU */}
-  {mobileMenuOpen && (
-    <div
-      className="
-        md:hidden
-        absolute
-        top-full
-        left-0
-        w-full
-        bg-black/95
-        backdrop-blur-xl
-        border-t
-        border-yellow-500/30
-        shadow-[0_10px_30px_rgba(0,0,0,0.6)]
-      "
-    >
-
-      <nav className="flex flex-col px-5 py-3">
-
-        <a
-          href="#home"
-          onClick={() => setMobileMenuOpen(false)}
-          className="
-            text-white
-            hover:text-yellow-400
-            py-4
-            text-lg
-            border-b
-            border-white/10
-            transition
-          "
-        >
-          🏠 Home
-        </a>
-
-        <a
-          href="#services"
-          onClick={() => setMobileMenuOpen(false)}
-          className="
-            text-white
-            hover:text-yellow-400
-            py-4
-            text-lg
-            border-b
-            border-white/10
-            transition
-          "
-        >
-          ✨ Services
-        </a>
-
-        <a
-          href="#destinations"
-          onClick={() => setMobileMenuOpen(false)}
-          className="
-            text-white
-            hover:text-yellow-400
-            py-4
-            text-lg
-            border-b
-            border-white/10
-            transition
-          "
-        >
-          📍 Destinations
-        </a>
-
-        <a
-          href="#about"
-          onClick={() => setMobileMenuOpen(false)}
-          className="
-            text-white
-            hover:text-yellow-400
-            py-4
-            text-lg
-            border-b
-            border-white/10
-            transition
-          "
-        >
-          🌴 About
-        </a>
-
-        <a
-          href="#contact"
-          onClick={() => setMobileMenuOpen(false)}
-          className="
-            text-white
-            hover:text-yellow-400
-            py-4
-            text-lg
-            transition
-          "
-        >
-          📞 Contact
-        </a>
-
-      </nav>
-
-    </div>
-  )}
-</header>
-      
-
-{/* HERO */}
+      {/* HERO */}
       {/* HERO VIDEO SECTION */}
 <section
   id="home"
@@ -1131,33 +979,33 @@ ${booking.request}`
       <div className="flex flex-col md:flex-row gap-4 justify-center">
 
         <a
-          href="https://wa.me/94706056220"
-          className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-8 py-4 rounded-full transition shadow-[0_0_25px_gold]"
-        >
-          💬 Chat on WhatsApp
-        </a>
-
-        <a
-          href="mailto:rngtours01@gmail.com"
-          className="border border-yellow-500 text-yellow-400 hover:bg-yellow-500 hover:text-black font-bold px-8 py-4 rounded-full transition"
-        >
-          📧 Send Email
-        </a>
-
-      </div>
-
-    </div>
-
-    {/* SMALL FOOTER TEXT */}
-    <p className="text-gray-500 text-sm mt-10">
-      We reply within minutes • RNG Tours in Sri Lanka • Your dream journey starts here
-    </p>
-
-  </div>
-</section>
-
-<Footer />
-
-</div>
-  );
+          href="https://wa.me/94706056220" 
+          className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-8 py-4 rounded-full transition shadow-[0_0_25px_gold]" 
+        > 
+          💬 Chat on WhatsApp 
+        </a> 
+ 
+        <a 
+          href="mailto:rngtours01@gmail.com" 
+          className="border border-yellow-500 text-yellow-400 hover:bg-yellow-500 hover:text-black font-bold px-8 py-4 rounded-full transition" 
+        > 
+          📧 Send Email 
+        </a> 
+ 
+      </div> 
+ 
+    </div> 
+ 
+    {/* SMALL FOOTER TEXT */} 
+    <p className="text-gray-500 text-sm mt-10"> 
+      We reply within minutes • RNG Tours in Sri Lanka • Your dream journey starts here 
+    </p> 
+ 
+  </div> 
+</section> 
+ 
+<Footer /> 
+ 
+</div> 
+  ); 
 }
