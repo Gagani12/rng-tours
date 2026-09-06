@@ -193,6 +193,7 @@ const [comments, setComments] = useState([]);
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [activeCategory, setActiveCategory] = useState("Beaches");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 
 const places = {
@@ -295,56 +296,231 @@ const [booking, setBooking] = useState({
   }, []);
 
   return (
-    <div className="bg-black text-white min-h-screen font-sans">
+    <div className="bg-black text-white min-h-screen font-sans overflow-x-hidden">
 
       {/* NAVBAR */}
-      <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
-        ${scrolled ? "bg-black/90 py-2 shadow-lg" : "bg-white/5 py-4"}
-        backdrop-blur-md border-b border-yellow-500/20`}
-      >
-        <div className="flex justify-between items-center px-6">
+      {/* NAVBAR */}
+<header
+  className={`fixed top-0 left-0 w-full z-[99999] transition-all duration-300
+  ${scrolled ? "bg-black/95 py-2 shadow-lg" : "bg-black/40 py-2"}
+  backdrop-blur-md border-b border-yellow-500/20`}
+>
 
-          {/* LOGO */}
-          <div className="flex items-center gap-2">
-            <img
-              src="RNG Tours Sri Lanka.png"
-              alt="RNG Tours"
-              className={`transition-all duration-300 ${scrolled ? "h-14" : "h-24"} w-auto`}
-            />
-            <h1 className="text-yellow-400 font-bold text-lg drop-shadow-[0_0_10px_gold]">
-              RNG TOURS
-            </h1>
-          </div>
+  <div
+  style={{
+    position: "fixed",
+    top: "100px",
+    right: "20px",
+    zIndex: 999999,
+    background: "red",
+    color: "white",
+    padding: "20px",
+    fontSize: "30px",
+    fontWeight: "bold",
+  }}
+>
+  TEST ☰
+</div>
 
-          <LanguageSelector />
+  <div className="w-full px-3 sm:px-4 md:px-6">
+    <div className="flex items-center w-full min-h-[64px]">
 
-          {/* MENU */}
-          <nav className="hidden md:flex space-x-2">
-            <a href="#home"
-            className="px-4 py-2 rounded-full text-gray-300 hover:text-black hover:bg-yellow-400 transition-all duration-300 hover:shadow-[0_0_15px_gold]"
-            >Home</a>
-            
-            <a href="#services"
-            className="px-4 py-2 rounded-full text-gray-300 hover:text-black hover:bg-yellow-400 transition-all duration-300 hover:shadow-[0_0_15px_gold]"
-            >Services</a>
-            
-            <a href="#destinations"
-            className="px-4 py-2 rounded-full text-gray-300 hover:text-black hover:bg-yellow-400 transition-all duration-300 hover:shadow-[0_0_15px_gold]"
-            >Destinations</a>
-            
-            <a href="#about"
-            className="px-4 py-2 rounded-full text-gray-300 hover:text-black hover:bg-yellow-400 transition-all duration-300 hover:shadow-[0_0_15px_gold]"
-            >About</a>
+      {/* LOGO + NAME */}
+      <div className="flex items-center gap-1 sm:gap-2 flex-shrink min-w-0">
 
-           <a href="#contact"
-            className="px-4 py-2 rounded-full bg-yellow-500 text-black font-semibold hover:bg-yellow-400 transition-all duration-300 shadow-md hover:shadow-[0_0_20px_gold]"
-            >Contact</a>
-            </nav>
-        </div>
-      </header>
+        <img
+          src="/RNG Tours Sri Lanka.png"
+          alt="RNG Tours"
+          className={`object-contain flex-shrink-0 transition-all duration-300 ${
+            scrolled
+              ? "h-11 w-auto sm:h-12 md:h-14"
+              : "h-14 w-auto sm:h-16 md:h-24"
+          }`}
+        />
 
-      {/* HERO */}
+        <h1
+          className="text-yellow-400 font-bold
+          text-[12px] sm:text-sm md:text-lg
+          whitespace-nowrap
+          drop-shadow-[0_0_10px_gold]"
+        >
+          RNG TOURS
+        </h1>
+
+      </div>
+
+      {/* DESKTOP NAVIGATION */}
+      <nav className="hidden md:flex items-center ml-auto mr-4">
+        <a
+          href="#home"
+          className="px-3 lg:px-4 py-2 text-white hover:text-yellow-400 transition"
+        >
+          Home
+        </a>
+
+        <a
+          href="#services"
+          className="px-3 lg:px-4 py-2 text-white hover:text-yellow-400 transition"
+        >
+          Services
+        </a>
+
+        <a
+          href="#destinations"
+          className="px-3 lg:px-4 py-2 text-white hover:text-yellow-400 transition"
+        >
+          Destinations
+        </a>
+
+        <a
+          href="#about"
+          className="px-3 lg:px-4 py-2 text-white hover:text-yellow-400 transition"
+        >
+          About
+        </a>
+
+        <a
+          href="#contact"
+          className="px-3 lg:px-4 py-2 text-white hover:text-yellow-400 transition"
+        >
+          Contact
+        </a>
+      </nav>
+
+      {/* RIGHT SIDE */}
+      <div className="ml-auto md:ml-0 flex items-center flex-shrink-0">
+
+        {/* LANGUAGE SELECTOR */}
+<div className="hidden md:block flex-shrink-0">
+  <LanguageSelector />
+</div>
+
+        {/* MOBILE HAMBURGER */}
+        <button
+  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+  type="button"
+  className="md:hidden ml-auto w-12 h-12 flex items-center justify-center rounded-lg border-2 border-yellow-400 bg-red-600"
+  style={{
+    position: "relative",
+    zIndex: 999999,
+    flexShrink: 0,
+    minWidth: "48px",
+    minHeight: "48px",
+  }}
+>
+  <span className="text-white text-3xl font-bold">☰</span>
+</button>
+
+      </div>
+
+    </div>
+  </div>
+
+  {/* MOBILE MENU */}
+  {mobileMenuOpen && (
+    <div
+      className="
+        md:hidden
+        absolute
+        top-full
+        left-0
+        w-full
+        bg-black/95
+        backdrop-blur-xl
+        border-t
+        border-yellow-500/30
+        shadow-[0_10px_30px_rgba(0,0,0,0.6)]
+      "
+    >
+
+      <nav className="flex flex-col px-5 py-3">
+
+        <a
+          href="#home"
+          onClick={() => setMobileMenuOpen(false)}
+          className="
+            text-white
+            hover:text-yellow-400
+            py-4
+            text-lg
+            border-b
+            border-white/10
+            transition
+          "
+        >
+          🏠 Home
+        </a>
+
+        <a
+          href="#services"
+          onClick={() => setMobileMenuOpen(false)}
+          className="
+            text-white
+            hover:text-yellow-400
+            py-4
+            text-lg
+            border-b
+            border-white/10
+            transition
+          "
+        >
+          ✨ Services
+        </a>
+
+        <a
+          href="#destinations"
+          onClick={() => setMobileMenuOpen(false)}
+          className="
+            text-white
+            hover:text-yellow-400
+            py-4
+            text-lg
+            border-b
+            border-white/10
+            transition
+          "
+        >
+          📍 Destinations
+        </a>
+
+        <a
+          href="#about"
+          onClick={() => setMobileMenuOpen(false)}
+          className="
+            text-white
+            hover:text-yellow-400
+            py-4
+            text-lg
+            border-b
+            border-white/10
+            transition
+          "
+        >
+          🌴 About
+        </a>
+
+        <a
+          href="#contact"
+          onClick={() => setMobileMenuOpen(false)}
+          className="
+            text-white
+            hover:text-yellow-400
+            py-4
+            text-lg
+            transition
+          "
+        >
+          📞 Contact
+        </a>
+
+      </nav>
+
+    </div>
+  )}
+</header>
+      
+
+{/* HERO */}
       {/* HERO VIDEO SECTION */}
 <section
   id="home"
@@ -370,7 +546,7 @@ const [booking, setBooking] = useState({
 
   {/* CONTENT */}
   <div className="relative z-10 max-w-3xl">
-    <h1 className="text-4xl md:text-6xl font-bold text-yellow-400">
+    <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-yellow-400 leading-tight">
       Discover Sri Lanka with RNG Tours
     </h1>
 
@@ -449,7 +625,7 @@ ${activeService===index
 
 <img
 src={services[activeService].image}
-className="w-full h-[550px] object-cover transition-all duration-700"
+className="w-full h-[300px] md:h-[550px] object-cover transition-all duration-700"
 />
 
 <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent"/>
@@ -458,7 +634,7 @@ className="w-full h-[550px] object-cover transition-all duration-700"
 
 <div className="max-w-xl px-10 md:px-16">
 
-<h2 className="text-5xl md:text-7xl font-bold text-white leading-tight">
+<h2 className="text-3xl sm:text-4xl md:text-7xl font-bold text-white leading-tight">
 {services[activeService].title}
 </h2>
 
@@ -586,7 +762,7 @@ View More Tours →
     Explore Sri Lanka Gallery
   </h2>
 
-  <div className="grid md:grid-cols-3 gap-6">
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
     {[
       "Sigiriya-Rock-Fortress-1.jpg",
       "Galle-Fort-Walking-Tour.png",
@@ -645,7 +821,7 @@ ${activeCategory===key
 
 <img
 src="Sri Lanka map.png"
-className="w-[320px] drop-shadow-[0_0_25px_gold]"
+className="w-[220px] sm:w-[280px] md:w-[320px] drop-shadow-[0_0_25px_gold]"
 />
 
 <div className="absolute inset-0">
@@ -846,7 +1022,7 @@ ${booking.request}`
   </p>
 
   {/* CARDS */}
-  <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto text-left">
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto text-left">
 
     {/* WHO WE ARE */}
     <div className="bg-gray-900 border border-yellow-500/20 p-8 rounded-2xl hover:scale-105 transition">
@@ -917,7 +1093,7 @@ ${booking.request}`
   <div className="relative max-w-5xl mx-auto text-center">
 
     {/* TITLE */}
-    <h2 className="text-5xl font-bold text-yellow-400 mb-4 drop-shadow-[0_0_20px_gold]">
+    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-yellow-400 mb-4 drop-shadow-[0_0_20px_gold]">
       Contact Us
     </h2>
 
@@ -926,7 +1102,7 @@ ${booking.request}`
     </p>
 
     {/* CONTACT CARD */}
-    <div className="bg-white/5 backdrop-blur-2xl border border-yellow-500/20 rounded-[40px] p-10 shadow-[0_0_60px_rgba(255,215,0,0.12)] hover:scale-[1.02] transition">
+    <div className="bg-white/5 backdrop-blur-2xl border border-yellow-500/20 rounded-[40px] p-5 md:p-10 shadow-[0_0_60px_rgba(255,215,0,0.12)] hover:scale-[1.02] transition">
 
       {/* ICONS ROW */}
       <div className="grid md:grid-cols-3 gap-6 mb-10">
