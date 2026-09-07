@@ -34,7 +34,7 @@ export default function LanguageSelector() {
   };
 
   return (
-    <div className="w-[170px]">
+    <div className="w-[110px] sm:w-[140px] md:w-[170px] flex-shrink-0">
       <ReactFlagsSelect
         selected={selected}
         onSelect={changeLanguage}

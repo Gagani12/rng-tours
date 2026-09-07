@@ -304,14 +304,16 @@ const [booking, setBooking] = useState({
         ${scrolled ? "bg-black/90 py-2 shadow-lg" : "bg-white/5 py-4"}
         backdrop-blur-md border-b border-yellow-500/20`}
       >
-        <div className="flex justify-between items-center px-4 md:px-6">
+        <div className="flex justify-between items-center px-3 sm:px-4 md:px-6 gap-2">
 
           {/* LOGO */}
           <div className="flex items-center gap-2 min-w-0">
             <img
               src="RNG Tours Sri Lanka.png"
               alt="RNG Tours"
-              className={`transition-all duration-300 ${scrolled ? "h-10 md:h-14" : "h-16 md:h-24"} w-auto flex-shrink-0`}
+              className={`transition-all duration-300 ${
+                scrolled ? "h-9 sm:h-10 md:h-14" : "h-12 sm:h-16 md:h-24"
+              } w-auto max-w-[130px] sm:max-w-[160px] md:max-w-none flex-shrink-0`}
             />
             <h1 className="text-yellow-400 font-bold text-base md:text-lg drop-shadow-[0_0_10px_gold] truncate">
               RNG TOURS
